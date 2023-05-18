@@ -64,3 +64,25 @@ git clone
 
 ```
 
+## Install Cuda
+```
+# 更新源
+## WSL
+wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-keyring_1.0-1_all.deb
+##  Ubuntu20.04
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-keyring_1.0-1_all.deb
+sudo dpkg -i cuda-keyring_1.0-1_all.deb
+sudo apt-get update
+# 安装cuda11.8(pytorch和jax暂时都用这个)
+sudo apt-get -y install cuda11.8
+```
+## Install NCCL
+
+```shell
+# 更新源，如果之前安装过cuda可不用做
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-keyring_1.0-1_all.deb
+sudo dpkg -i cuda-keyring_1.0-1_all.deb
+sudo apt-get update
+# 安装nccl
+sudo apt install libnccl2=2.16.2-1+cuda11.8 libnccl-dev=2.16.2-1+cuda11.8
+```
