@@ -24,7 +24,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "tracer.h"
+#include "triton/utils/tracer.h"
 
 #include <stdlib.h>
 #include <unordered_map>
@@ -34,7 +34,7 @@
 #endif  // TRITON_ENABLE_GPU
 #include <iostream>
 
-namespace triton { namespace developer_tools { namespace server {
+namespace triton { namespace utils { namespace server {
 
 #define IGNORE_ERROR(X)                   \
   do {                                    \

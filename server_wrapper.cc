@@ -24,7 +24,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "triton/developer_tools/server_wrapper.h"
+#include "triton/utils/server_wrapper.h"
 #include <stdlib.h>
 #include <iostream>
 #include <mutex>
@@ -38,7 +38,7 @@
 #define TRITONJSON_STATUSSUCCESS nullptr
 #include "triton/common/triton_json.h"
 
-namespace triton { namespace developer_tools { namespace server {
+namespace triton { namespace utils { namespace server {
 
 #define THROW_IF_TRITON_ERR(X)                                     \
   do {                                                             \

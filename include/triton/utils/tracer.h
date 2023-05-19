@@ -34,10 +34,11 @@
 #include <sstream>
 #include <string>
 #include <unordered_map>
-#include "../include/triton/developer_tools/common.h"
-#include "triton/core/tritonserver.h"
 
-namespace triton { namespace developer_tools { namespace server {
+#include "triton/core/tritonserver.h"
+#include "types.h"
+
+namespace triton { namespace utils { namespace server {
 
 class TraceManager {
  public:

@@ -34,15 +34,15 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
-#include "../src/infer_requested_output.h"
-#include "../src/tracer.h"
-#include "common.h"
+#include "infer_requested_output.h"
+#include "tracer.h"
+#include "types.h"
 #include "triton/core/tritonserver.h"
 #ifdef TRITON_ENABLE_GPU
 #include <cuda_runtime_api.h>
 #endif  // TRITON_ENABLE_GPU
 
-namespace triton { namespace developer_tools { namespace server {
+namespace triton { namespace utils { namespace server {
 
 class Allocator;
 class InferResult;

@@ -26,10 +26,11 @@
 #pragma once
 
 #include <string>
-#include "../include/triton/developer_tools/common.h"
-#include "triton/core/tritonserver.h"
 
-namespace triton { namespace developer_tools { namespace server {
+#include "triton/core/tritonserver.h"
+#include "types.h"
+
+namespace triton { namespace utils { namespace server {
 
 //==============================================================================
 /// An InferRequestedOutput object is used to describe the requested model
@@ -105,4 +106,4 @@ class InferRequestedOutput {
   int64_t memory_type_id_;
 };
 
-}}}  // namespace triton::developer_tools::server
+}}}  // namespace triton::utils::server
