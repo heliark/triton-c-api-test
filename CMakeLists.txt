@@ -7,7 +7,7 @@ option(TRITON_ENABLE_STATS "Include statistics collections in server" ON)
 option(TRITON_ENABLE_TRACING "Include tracing support in server" OFF)
 option(TRITON_ENABLE_GPU "Enable GPU support in server" ON)
 set(TRITON_MIN_COMPUTE_CAPABILITY "6.0" CACHE STRING
-    "The minimum CUDA compute capability supported by Triton" )
+        "The minimum CUDA compute capability supported by Triton")
 
 # Ensemble
 option(TRITON_ENABLE_ENSEMBLE "Include ensemble support in server" OFF)
@@ -23,12 +23,12 @@ endif ()
 #
 include(FetchContent)
 
-#FetchContent_Declare(
-#        repo-common
-#        GIT_REPOSITORY https://github.com/triton-inference-server/common.git
-#        GIT_TAG ${TRITON_COMMON_REPO_TAG}
-#        GIT_SHALLOW ON
-#)
+FetchContent_Declare(
+        repo-common
+        GIT_REPOSITORY https://github.com/triton-inference-server/common.git
+        GIT_TAG ${TRITON_COMMON_REPO_TAG}
+        GIT_SHALLOW ON
+)
 FetchContent_Declare(
         repo-core
         GIT_REPOSITORY https://github.com/triton-inference-server/core.git
@@ -36,8 +36,7 @@ FetchContent_Declare(
         GIT_SHALLOW ON
 )
 set(TRITON_CORE_HEADERS_ONLY OFF)
-#FetchContent_MakeAvailable(repo-common repo-core)
-FetchContent_MakeAvailable(repo-core)
+FetchContent_MakeAvailable(repo-common repo-core)
 
 #
 # CUDA
@@ -93,6 +92,8 @@ target_link_libraries(
         PUBLIC
         triton-core-serverapi         # from repo-core
         triton-core-serverstub        # from repo-core
+        triton-common-json            # from repo-common
+        triton-common-logging         # from repo-common
 )
 
 if (${TRITON_ENABLE_GPU})
