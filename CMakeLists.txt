@@ -79,11 +79,10 @@ if (${TRITON_ENABLE_STATS})
     )
 endif () # TRITON_ENABLE_STATS
 
-# TODO 搞清楚这几个的意思是啥(有可能是因为本地链接了stub导致的报错？)
 set_target_properties(
         triton-c-api-test
         PROPERTIES
-        SKIP_BUILD_RPATH TRUE
+        SKIP_BUILD_RPATH TRUE # 去除BUILD过程中的Runtime PATH，从而不链接到triton-core-serverstub上
         BUILD_WITH_INSTALL_RPATH TRUE
         INSTALL_RPATH_USE_LINK_PATH FALSE
         INSTALL_RPATH ""
