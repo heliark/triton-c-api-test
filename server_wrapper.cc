@@ -799,7 +799,7 @@ ServerOptions::ServerOptions(
       disable_auto_complete_config_(false),
       model_control_mode_(ModelControlMode::NONE), repository_poll_secs_(15),
       pinned_memory_pool_byte_size_(1 << 28), response_cache_byte_size_(0),
-      min_cuda_compute_capability_(0), exit_on_error_(true),
+      min_cuda_compute_capability_(0), exit_on_error_(true), strict_model_config_(false),
       exit_timeout_secs_(30), buffer_manager_thread_count_(0),
       model_load_thread_count_(
           std::max(2u, 2 * std::thread::hardware_concurrency())),
@@ -1609,6 +1609,10 @@ InternalServer::InternalServer(const ServerOptions& options)
         server_options, hp.name_.c_str(),
         HostPolicySettingString(hp.setting_).c_str(), hp.value_.c_str()));
   }
+
+  // Set strict model config
+  THROW_IF_TRITON_ERR(TRITONSERVER_ServerOptionsSetStrictModelConfig(
+      server_options, options.strict_model_config_));
 
   TRITONSERVER_Server* server_ptr;
   THROW_IF_TRITON_ERR(TRITONSERVER_ServerNew(&server_ptr, server_options));

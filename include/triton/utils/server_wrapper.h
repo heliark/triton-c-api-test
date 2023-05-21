@@ -34,10 +34,11 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+
 #include "infer_requested_output.h"
 #include "tracer.h"
-#include "types.h"
 #include "triton/core/tritonserver.h"
+#include "types.h"
 #ifdef TRITON_ENABLE_GPU
 #include <cuda_runtime_api.h>
 #endif  // TRITON_ENABLE_GPU
@@ -302,7 +303,7 @@ struct ServerOptions {
   // changes. Valid only when 'model_control_mode_' is set to "POLL". Default
   // is 15.
   int32_t repository_poll_secs_;
-  // Specify the the models to be loaded on server startup. This will only take
+  // Specify the models to be loaded on server startup. This will only take
   // effect if 'model_control_mode_' is set to 'EXPLICIT'.
   std::set<std::string> startup_models_;
   // The number of resources available to the server. Rate limiting is disabled
@@ -342,6 +343,8 @@ struct ServerOptions {
   // The number of threads used to accelerate copies and other operations
   // required to manage input and output tensor contents. Default is 0.
   int32_t buffer_manager_thread_count_;
+  // If set, the model configuration specified in the model repository must strictly
+  bool strict_model_config_;
   // The number of threads used to concurrently load models in model
   // repositories. Default is 2*<num_cpu_cores>.
   uint32_t model_load_thread_count_;
@@ -965,4 +968,4 @@ InferRequest::AddInput(
   AddInput(name, input);
 }
 
-}}}  // namespace triton::developer_tools::server
+}}}  // namespace triton::utils::server
