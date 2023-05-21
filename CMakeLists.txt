@@ -4,13 +4,13 @@ project(triton-c-api-test VERSION 0.0.1 LANGUAGES C CXX)
 
 option(TRITON_ENABLE_LOGGING "Include logging support in server" ON)
 option(TRITON_ENABLE_STATS "Include statistics collections in server" ON)
-option(TRITON_ENABLE_TRACING "Include tracing support in server" OFF)
+option(TRITON_ENABLE_TRACING "Include tracing support in server" ON)
 option(TRITON_ENABLE_GPU "Enable GPU support in server" ON)
 set(TRITON_MIN_COMPUTE_CAPABILITY "6.0" CACHE STRING
         "The minimum CUDA compute capability supported by Triton")
 
 # Ensemble
-option(TRITON_ENABLE_ENSEMBLE "Include ensemble support in server" OFF)
+option(TRITON_ENABLE_ENSEMBLE "Include ensemble support in server" ON)
 
 set(TRITON_COMMON_REPO_TAG "main" CACHE STRING "Tag for triton-inference-server/common repo")
 set(TRITON_CORE_REPO_TAG "main" CACHE STRING "Tag for triton-inference-server/core repo")
@@ -54,7 +54,14 @@ if (${TRITON_ENABLE_GPU})
     endif ()
 endif () # TRITON_ENABLE_GPU
 
-add_executable(triton-c-api-test main.cpp)
+find_package(Threads REQUIRED)
+
+add_executable(
+        triton-c-api-test
+        main.cpp
+        server_wrapper.cc
+        utils.cc
+        tracer.cc)
 
 target_include_directories(triton-c-api-test PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
@@ -90,6 +97,7 @@ set_target_properties(
 target_link_libraries(
         triton-c-api-test
         PUBLIC
+        Threads::Threads
         triton-core-serverapi         # from repo-core
         triton-core-serverstub        # from repo-core
         triton-common-json            # from repo-common
